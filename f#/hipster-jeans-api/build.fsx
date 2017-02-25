@@ -44,7 +44,7 @@ let reloadScript () =
   try
     //Reload application
     traceImportant "Reloading app.fsx script..."
-    let appFsx = __SOURCE_DIRECTORY__ @@ "app.fsx"
+    let appFsx = __SOURCE_DIRECTORY__ @@ "src/app.fsx"
     fsiSession.EvalInteraction(sprintf "#load @\"%s\"" appFsx)
     fsiSession.EvalInteraction("open App")
     match fsiSession.EvalExpression("app") with
@@ -84,7 +84,7 @@ Target "run" (fun _ ->
   let _, server = startWebServerAsync (getLocalServerConfig port) app
 
   // Start Suave to host it on localhost
-  reloadAppServer ["app.fsx"]
+  reloadAppServer ["src/app.fsx"]
   Async.Start(server)
   // Open web browser with the loaded file
   System.Diagnostics.Process.Start(sprintf "http://localhost:%d" port) |> ignore

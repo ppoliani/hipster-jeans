@@ -3,3 +3,4 @@ nuget Fake
 nuget FSharp.Compiler.Service
 nuget FSharp.Core
 nuget Suave
+nuget Suave.Swagger
