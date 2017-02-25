@@ -8,7 +8,9 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import App from './App';
 import configureStore from '../data/';
 
-import './index.html';
+if(process.env.NODE_ENV === 'development') {
+  require('./index.html');
+}
 
 ReactDOM.render(
   <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
