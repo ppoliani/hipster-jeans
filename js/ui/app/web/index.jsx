@@ -12,6 +12,8 @@ if(process.env.NODE_ENV === 'development') {
   require('./index.html');
 }
 
+import './app.css'
+
 ReactDOM.render(
   <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
     <Provider store={configureStore()}>
