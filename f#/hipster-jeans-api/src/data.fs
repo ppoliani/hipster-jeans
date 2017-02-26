@@ -17,15 +17,13 @@ module Data =
     let index = rnd.Next(0, arr.Length - 1)
     arr.[index]
 
-  let getRandomDates() =
+  let randomDates =
     let yearAgo = DateTime.Today.AddMonths(-12);
     let today = DateTime.Today
     Seq.unfold (fun d -> if d < today then Some(d, d.AddDays(1.0)) else None)
       yearAgo
       |> Seq.map (fun d -> d.ToString("MM/dd/yyyy"))
       |> Seq.toArray
-
-  let randomDates = getRandomDates()
 
   [<CLIMutable>]
   type Sale =
