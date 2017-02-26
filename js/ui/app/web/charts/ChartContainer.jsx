@@ -30,6 +30,16 @@ class ChartContainer extends Component {
         </div>
     );
   }
+
+  // find all keys in the chartData except for name
+  getKeys(keys, chartData) {
+    return keys.length
+      ? keys
+      : Reflect
+        .ownKeys(chartData.get(0))
+        .filter(k => k !== 'name');
+  }
+
   renderChart() {
     const { sales, transform, type, keys } = this.props;
 
@@ -41,7 +51,7 @@ class ChartContainer extends Component {
         const chartData = transformToChartData(transform(sales));
 
         return this.props.type.cata({
-          StackedArea: () => <StackedAreaChart data={chartData} keys={keys}/>
+          StackedArea: () => <StackedAreaChart data={chartData} keys={this.getKeys(keys, chartData)}/>
         });
       }
     });
