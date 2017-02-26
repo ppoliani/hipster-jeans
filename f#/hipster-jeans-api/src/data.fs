@@ -13,8 +13,9 @@ module Data =
   let colours = [| "red"; "Dark Blue"; "Light Blue"; "Yellow"; "Black"; "white" |]
   let styles = [| "Relaxed"; "Skinny"; "Slim"; "Boot Cut" |]
   let rnd = System.Random()
+
   let getRandomValueFromArray<'a> (arr: 'a[]): 'a =
-    let index = rnd.Next(0, arr.Length - 1)
+    let index = rnd.Next(0, arr.Length)
     arr.[index]
 
   let randomDates =

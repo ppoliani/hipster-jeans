@@ -1,6 +1,7 @@
 import { curry } from 'folktale/core/lambda';
 import compose from 'folktale/core/lambda/compose';
 import map  from 'folktale/core/fantasy-land/map';
+import { fromJS } from 'immutable';
 import { createAction } from 'redux-actions';
 import fetch from '../../helpers/api';
 
@@ -11,18 +12,13 @@ export const getSalesHistoryRoot = (fetch) => {
   const getUrl = _ => `${process.env.API_URL}/sales`;
   const fetchData = compose(fetch, getUrl);
 
-  const transformData = salesHistory => {
-    //Todo(Pavlos): implement the real transformation function
-    return salesHistory;
-  }
-
   return createAction(
     GET_SALES_HISTORY,
     compose(
-      map.curried(transformData),
+      map.curried(fromJS),
       fetchData
     )
   );
 };
 
-export const getSalesHistory = curry(1, getSalesHistoryRoot)(fetch);
+export const getSalesHistory = getSalesHistoryRoot(fetch);
