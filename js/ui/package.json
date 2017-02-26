@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "test": "node_modules/.bin/ava app/**/*.test.js",
+    "test": "node_modules/.bin/ava ./app/**/*.test.js",
     "web:start": "cross-env PLATFORM_ENV=web webpack-dev-server",
     "web:build": "cross-env NODE_ENV=production PLATFORM_ENV=web webpack --env.prod=true",
     "web:prod": "cross-env NODE_ENV=production PLATFORM_ENV=web  webpack-dev-server --env.prod=true"

@@ -1,7 +1,4 @@
-import { task } from 'folktale/data/task';
-import { identity } from 'folktale/core/lambda';
 import { OrderedMap, Map, List } from 'immutable';
-import monthTransform20170226160132 from '../../../../../.history/js/ui/app/data/transaformation/monthTransform_20170226160132'
 
 const MONTH_ORDERS = {
   Jan: 12, Feb: 11, March: 10, April: 9, May: 8, June: 7, July: 6, Aug: 5, Sep: 4, Oct: 3, Nov: 2, Dec: 1

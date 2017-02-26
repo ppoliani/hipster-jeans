@@ -1,5 +1,3 @@
-import { task } from 'folktale/data/task';
-import { identity } from 'folktale/core/lambda';
 import { Map } from 'immutable';
 
 // take the raw data as they come from the API and
