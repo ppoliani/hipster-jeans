@@ -1,11 +1,16 @@
 import { task } from 'folktale/data/task';
 import { identity } from 'folktale/core/lambda';
-import { Map, List } from 'immutable';
+import { OrderedMap, Map, List } from 'immutable';
+import monthTransform20170226160132 from '../../../../../.history/js/ui/app/data/transaformation/monthTransform_20170226160132'
+
+const MONTH_ORDERS = {
+  Jan: 12, Feb: 11, March: 10, April: 9, May: 8, June: 7, July: 6, Aug: 5, Sep: 4, Oct: 3, Nov: 2, Dec: 1
+};
 
 const MONTHS = {
   '01': 'Jan',
   '02': 'Feb',
-  '03': 'Mar',
+  '03': 'March',
   '04': 'April',
   '05': 'May',
   '06': 'June',
@@ -17,18 +22,24 @@ const MONTHS = {
   '12': 'Dec'
 };
 
-const getMonthString = date => MONTHS[date.split('/')[0]];
+const getMonth = date => date.split('/')[0];
+const getMonthString = date => MONTHS[getMonth(date)];
 
+const monthComparator = (monthA, monthB) => MONTH_ORDERS[monthB] - MONTH_ORDERS[monthA];
+
+//group the raw data by month
+// i.e. raw data -> { Jan: { deliveryCountry: ... } }
 const groupByMonth = sales => {
-  return sales.reduce(
-    (acc, item) => {
-      return acc.update(
-        getMonthString(item.get('orderDate')),
-        (list = List()) => list.push(item)
-      )
-    },
-    Map()
-  );
+  return sales
+    .reduce(
+      (acc, item) => {
+        return acc.update(
+          getMonthString(item.get('orderDate')),
+          (list = List()) => list.push(item)
+        )
+      },
+      OrderedMap()
+    )
 };
 
 export const groupByMonthGlobally = sales => {
@@ -42,9 +53,14 @@ export const groupByMonthGlobally = sales => {
           )
         ),
         Map()
+      )
+      .sortBy(
+        (value, key) => key,
+        monthComparator
       );
 };
 
+// raw data -> { Jan: { Germany: 1200, Italy: 500 }, Feb: {...} }
 export const groupByMonthByCountry = sales => {
   return groupByMonth(sales)
     .reduce((counts, list, key) =>
@@ -60,4 +76,8 @@ export const groupByMonthByCountry = sales => {
       ),
       Map()
     )
+    .sortBy(
+      (value, key) => key,
+      monthComparator
+    );
 };
