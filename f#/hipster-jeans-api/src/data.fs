@@ -48,4 +48,4 @@ module Data =
       Count=getRandomValueFromArray [|1UL..100UL|]}
 
   let getData =
-     JSON (Array.init <| 1000 <| initArray)
+     JSON (Array.init <| 10000 <| initArray)
