@@ -7,10 +7,11 @@ open Suave
 open Suave.Filters
 open Suave.Operators
 open Suave.Successful
+open Suave.CORS
 open Hipster.Data
 
 let app =
   choose
     [ GET >=> choose
-        [ path "/sales" >=> getData  ]
+        [ path "/sales" >=> cors defaultCORSConfig  >=> getData  ]
     ]

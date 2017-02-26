@@ -2,13 +2,14 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import AppBar from 'material-ui/AppBar';
 import { compose } from 'folktale/core/lambda';
+import { getSalesHistory } from '../data/sales/salesActions.js';
 
 class App extends Component {
   componentDidMount() {
     this.props.loadSalesData();
   }
 
-  render() {s
+  render() {
     return <div>Hi</div>
   }
 }
