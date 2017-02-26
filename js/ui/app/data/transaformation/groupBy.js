@@ -5,11 +5,14 @@ import { Map } from 'immutable';
 export default (propA, propB, sales) => {
   return sales
     .groupBy(s => s.get(propA))
-    .reduce((counts, list, manufacturer) =>
+    .reduce((counts, list, key) =>
       counts.set(
-        manufacturer,
+        key,
         list.reduce((acc, i) =>
-          acc.update(i.get(propB), (sum = 0) => sum + i.get('count')),
+          acc.update(
+            i.get(propB),
+            (sum = 0) => sum + i.get('count')
+          ),
           Map()
         )
       ),
