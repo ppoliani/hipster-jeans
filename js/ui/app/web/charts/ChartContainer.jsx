@@ -4,6 +4,7 @@ import {Card, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card
 import RefreshIndicator from 'material-ui/RefreshIndicator';
 import transformToChartData from './transformer';
 import  StackedAreaChart from './StackedAreaChart';
+import StackedBarChart from './StackedBarChart';
 import ChartType from './ChartType';
 
 class ChartContainer extends Component {
@@ -51,7 +52,8 @@ class ChartContainer extends Component {
         const chartData = transformToChartData(transform(sales));
 
         return this.props.type.cata({
-          StackedArea: () => <StackedAreaChart data={chartData} keys={this.getKeys(keys, chartData)}/>
+          StackedArea: () => <StackedAreaChart data={chartData} keys={this.getKeys(keys, chartData)}/>,
+          StackedBarChart: () => <StackedBarChart data={chartData} keys={this.getKeys(keys, chartData)}/>
         });
       }
     });
