@@ -13,19 +13,23 @@ module Data =
   let colours = [| "red"; "Dark Blue"; "Light Blue"; "Yellow"; "Black"; "white" |]
   let styles = [| "Relaxed"; "Skinny"; "Slim"; "Boot Cut" |]
   let rnd = System.Random()
-  let getRandomValueFromArray (arr: _[]) =
+  let getRandomValueFromArray<'a> (arr: 'a[]): 'a =
     let index = rnd.Next(0, arr.Length - 1)
     arr.[index]
 
-  let getRandomDate =
-    let a = new System.DateTime()
-    let b = new System.DateTime()
-    a
+  let getRandomDates() =
+    let yearAgo = DateTime.Today.AddMonths(-12);
+    let today = DateTime.Today
+    Seq.unfold (fun d -> if d < today then Some(d, d.AddDays(1.0)) else None)
+      yearAgo
+      |> Seq.map (fun d -> d.ToString("MM/dd/yyyy"))
+      |> Seq.toArray
 
+  let randomDates = getRandomDates()
 
   [<CLIMutable>]
   type Sale =
-    { OrderDate:int
+    { OrderDate:string
       DeliveryCountry:string
       Manufacturer:string
       Gender:string
@@ -35,7 +39,7 @@ module Data =
       Count:uint64 }
 
   let initArray _ =
-    { OrderDate=45
+    { OrderDate=getRandomValueFromArray randomDates
       DeliveryCountry=getRandomValueFromArray countries
       Manufacturer=getRandomValueFromArray manufacturers
       Gender=getRandomValueFromArray genders
