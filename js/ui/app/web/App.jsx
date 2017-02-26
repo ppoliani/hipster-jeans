@@ -5,10 +5,10 @@ import { compose } from 'folktale/core/lambda';
 
 class App extends Component {
   componentDidMount() {
-    this.props.loadSalesData({});
+    this.props.loadSalesData();
   }
 
-  render() {
+  render() {s
     return <div>Hi</div>
   }
 }
@@ -16,7 +16,7 @@ class App extends Component {
 const mapStateToProps = state => state;
 
 const mapDispatchToProps = dispatch => ({
-    loadSalesData: () => {}
+    loadSalesData: () => dispatch(getSalesHistory())
 });
 
 export default connect(

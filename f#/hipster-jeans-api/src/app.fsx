@@ -1,5 +1,6 @@
 #r "../packages/Suave/lib/net40/Suave.dll"
 #r "../packages/Suave.Swagger/lib/Suave.Swagger.dll"
+#r "../packages/Newtonsoft.Json/lib/portable-net45+wp80+win8+wpa81/Newtonsoft.Json.dll"
 #load "data.fs"
 
 open Suave
@@ -13,4 +14,3 @@ let app =
     [ GET >=> choose
         [ path "/sales" >=> getData  ]
     ]
-

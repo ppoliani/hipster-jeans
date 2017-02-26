@@ -6,11 +6,11 @@ import fetch from '../../helpers/api';
 
 export const GET_SALES_HISTORY= 'SALES::GET_SALES_HISTORY';
 
-const DUMMY_URL = 'https://jsonplaceholder.typicode.com/posts/1';
+const URL = 'localhost:8083/sales';
 
 export const getSalesHistoryRoot = (fetch) => {
   // ToDo(Pavlos): construct the url with the search criteria
-  const getUrl = searchCriteria => DUMMY_URL;
+  const getUrl = _ => URL;
   const fetchData = compose(fetch, getUrl);
 
   const transformData = salesHistory => {

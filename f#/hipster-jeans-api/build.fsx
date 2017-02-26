@@ -100,6 +100,19 @@ Target "run" (fun _ ->
   Console.ReadLine() |> ignore
 )
 
+Target "run-prod" (fun _ ->
+  let app ctx = currentApp.Value ctx
+  let port = findPort 8083
+  let _, server = startWebServerAsync (getLocalServerConfig port) app
+
+  // Start Suave to host it on localhost
+  reloadAppServer ["src/app.fsx"]
+  Async.Start(server)
+  // Open web browser with the loaded file
+  System.Diagnostics.Process.Start(sprintf "http://localhost:%d" port) |> ignore
+  Console.ReadLine() |> ignore
+)
+
 // --------------------------------------------------------------------------------------
 // Minimal Azure deploy script - just overwrite old files with new ones
 // --------------------------------------------------------------------------------------
@@ -109,7 +122,7 @@ Target "clean" (fun _ ->
 )
 
 Target "build" (fun _ ->
-  [ "FsSnip.WebSite.sln" ]
+  [ "hipster-jeans-api.fsproj" ]
   |> MSBuildRelease "" "Rebuild"
   |> Log ""
 )
@@ -119,7 +132,7 @@ let newName prefix f =
 
 Target "deploy" (fun _ ->
   // Pick a subfolder that does not exist
-  let wwwroot = "../wwwroot"
+  let wwwroot = "wwwroot"
   let subdir = newName "deploy" (fun sub -> not (Directory.Exists(wwwroot </> sub)))
 
   // Deploy everything into new empty folder
