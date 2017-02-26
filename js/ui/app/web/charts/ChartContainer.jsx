@@ -42,18 +42,19 @@ class ChartContainer extends Component {
   }
 
   renderChart() {
-    const { sales, transform, type, keys } = this.props;
+    const { sales, groupBy, type, keys } = this.props;
 
     return this.props.sales.cata({
       Empty: this.renderLoadingIndicator,
       Loading: this.renderLoadingIndicator,
       Failure: identity,
       Success: sales => {
-        const chartData = transformToChartData(transform(sales));
+        const chartData = transformToChartData(groupBy(sales));
 
         return this.props.type.cata({
           StackedArea: () => <StackedAreaChart data={chartData} keys={this.getKeys(keys, chartData)}/>,
-          StackedBarChart: () => <StackedBarChart data={chartData} keys={this.getKeys(keys, chartData)}/>
+          StackedBarChart: () => <StackedBarChart data={chartData} keys={this.getKeys(keys, chartData)}/>,
+          BarChart: () => <StackedBarChart data={chartData} keys={this.getKeys(keys, chartData)}/>
         });
       }
     });

@@ -5,7 +5,7 @@ import { colours } from './constants';
 class StackedAreaChart extends Component {
   renderAreas(keys) {
     return keys.map((key, i) => {
-      return <Bar key={key} type='monotone' dataKey={key} stackId={i} stroke={colours[i]} fill={colours[i]} />
+      return <Bar key={key} type='monotone' dataKey={key} stackId='a' stroke={colours[i]} fill={colours[i]} />
     });
   }
 
