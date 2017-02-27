@@ -9,7 +9,7 @@ https://docs.docker.com/docker-for-mac/install/
 How to run
 =====
  - `docker-compose up` this will take some time the first time you run it.
- - open browser `http://localhost`
+ - open the browser of your choice `http://localhost:7372`
 
 
 Functionality
