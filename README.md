@@ -2,11 +2,15 @@
 
 Prerequisites
 =====
-Docker is the only requirement. Please make sure you have docker installed on your machine.
+Docker is the only requirement. Please make sure you have docker tools installed on your machine.
+
+https://docs.docker.com/docker-for-mac/install/
 
 How to run
 =====
-Docker compose
+ - `docker-compose up` this will take some time the first time you run it.
+ - open browser `http://localhost`
+
 
 Functionality
 =====

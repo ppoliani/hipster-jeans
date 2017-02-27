@@ -10,7 +10,7 @@ services:
     links:
       - suave:suave
     ports:
-      - "80:80"
+      - "7372:80"
     networks:
       - hipster_network
   suave:
