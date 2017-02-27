@@ -1,0 +1,7 @@
+js/**/node_modules
+f#/hipster-jeans-api/packages
+f#/hipster-jeans-api/obj
+f#/hipster-jeans-api/bin
+**/**/.DS_Store
+**/**/.gitignore
+.git

@@ -84,7 +84,7 @@ Target "run" (fun _ ->
   let _, server = startWebServerAsync (getLocalServerConfig port) app
 
   // Start Suave to host it on localhost
-  reloadAppServer ["src/app.fsx"]
+  reloadAppServer ["app.fsx"]
   Async.Start(server)
   // Open web browser with the loaded file
   System.Diagnostics.Process.Start(sprintf "http://localhost:%d" port) |> ignore
@@ -106,7 +106,7 @@ Target "run-prod" (fun _ ->
   let _, server = startWebServerAsync (getLocalServerConfig port) app
 
   // Start Suave to host it on localhost
-  reloadAppServer ["src/app.fsx"]
+  reloadAppServer ["/src/app.fsx"]
   Async.Start(server)
   // Open web browser with the loaded file
   System.Diagnostics.Process.Start(sprintf "http://localhost:%d" port) |> ignore

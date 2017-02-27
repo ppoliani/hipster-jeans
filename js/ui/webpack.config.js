@@ -5,7 +5,7 @@ const sourcePath = path.join(__dirname, './');
 const distPath = path.join(__dirname, './app/web/dist');
 
 module.exports = () => {
-  const nodeEnv = process.env.prod ? 'production' : 'development';
+  const nodeEnv = process.env.NODE_ENV ? 'production' : 'development';
   const isProd = nodeEnv === 'production';
 
   const plugins = [
@@ -18,7 +18,7 @@ module.exports = () => {
       'process.env': {
         NODE_ENV: JSON.stringify(nodeEnv),
         PLATFORM_ENV: JSON.stringify(process.env.PLATFORM_ENV),
-        API_URL: JSON.stringify('http://localhost:8083')
+        API_URL: isProd ? "suave" : JSON.stringify('http://localhost:8083')
       }
     }),
     new webpack.NamedModulesPlugin(),
@@ -29,24 +29,24 @@ module.exports = () => {
       new webpack.LoaderOptionsPlugin({
         minimize: true,
         debug: false
-      }),
-      new webpack.optimize.UglifyJsPlugin({
-        compress: {
-          warnings: false,
-          screw_ie8: true,
-          conditionals: true,
-          unused: true,
-          comparisons: true,
-          sequences: true,
-          dead_code: true,
-          evaluate: true,
-          if_return: true,
-          join_vars: true,
-        },
-        output: {
-          comments: false,
-        },
       })
+      // new webpack.optimize.UglifyJsPlugin({
+      //   compress: {
+      //     warnings: false,
+      //     screw_ie8: true,
+      //     conditionals: true,
+      //     unused: true,
+      //     comparisons: true,
+      //     sequences: true,
+      //     dead_code: true,
+      //     evaluate: true,
+      //     if_return: true,
+      //     join_vars: true,
+      //   },
+      //   output: {
+      //     comments: false,
+      //   },
+      // })
     );
   }
   else {
@@ -55,7 +55,7 @@ module.exports = () => {
     );
   }
 
-  return {
+  const config = {
     devtool: isProd ? 'source-map' : 'source-map',
     context: sourcePath,
 
@@ -68,7 +68,10 @@ module.exports = () => {
         'redux-actions',
         'immutable',
         'babel-polyfill',
-        'material-ui'
+        'material-ui',
+        'recharts',
+        'folktale',
+        'daggy'
       ]
     },
 
@@ -128,9 +131,11 @@ module.exports = () => {
         green: '\u001b[32m',
       },
       errorDetails: true,
-    },
+    }
+  };
 
-    devServer: {
+  if(!isProd) {
+    config['devServer'] = {
       contentBase: path.resolve(__dirname, 'app'),
       historyApiFallback: true,
       port: 3000,
@@ -152,5 +157,7 @@ module.exports = () => {
         }
       }
     }
-  };
+  }
+
+  return config;
 };

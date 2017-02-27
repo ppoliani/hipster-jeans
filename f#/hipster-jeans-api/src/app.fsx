@@ -15,3 +15,11 @@ let app =
     [ GET >=> choose
         [ path "/sales" >=> cors defaultCORSConfig  >=> getData  ]
     ]
+
+
+let getLocalServerConfig port =
+  { defaultConfig with
+      homeFolder = Some __SOURCE_DIRECTORY__
+      bindings = [ HttpBinding.createSimple HTTP  "127.0.0.1" port ] }
+
+startWebServer (getLocalServerConfig 8083) app
