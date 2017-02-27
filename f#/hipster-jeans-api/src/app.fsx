@@ -20,6 +20,6 @@ let app =
 let getLocalServerConfig port =
   { defaultConfig with
       homeFolder = Some __SOURCE_DIRECTORY__
-      bindings = [ HttpBinding.createSimple HTTP  "127.0.0.1" port ] }
+      bindings = [ HttpBinding.createSimple HTTP  "0.0.0.0" port ] }
 
 startWebServer (getLocalServerConfig 8083) app

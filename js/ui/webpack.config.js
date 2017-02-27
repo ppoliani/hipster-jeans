@@ -18,7 +18,7 @@ module.exports = () => {
       'process.env': {
         NODE_ENV: JSON.stringify(nodeEnv),
         PLATFORM_ENV: JSON.stringify(process.env.PLATFORM_ENV),
-        API_URL: isProd ? JSON.stringify("suave") : JSON.stringify('http://localhost:8083')
+        API_URL: JSON.stringify('http://localhost:8083')
       }
     }),
     new webpack.NamedModulesPlugin(),
